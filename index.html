@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAYFER CREACIÓNES - Panel Digital</title>
+    <title>DAYFER CREACIÓNES - Sistema de Inventario</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,6 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            overflow-x: hidden;
         }
 
         .watermark {
@@ -30,108 +29,86 @@
             transform: translate(-50%, -50%) rotate(-30deg);
             font-size: 5rem;
             font-weight: 900;
-            color: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.03);
             white-space: nowrap;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 0;
             text-transform: uppercase;
             letter-spacing: 5px;
         }
 
         header {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.95);
             border-bottom: 1px solid #1e293b;
-            padding: 1.2rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 10;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             background: linear-gradient(45deg, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #38bdf8;
-        }
-
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2rem;
             width: 100%;
             flex: 1;
+            z-index: 1;
         }
 
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .hero p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
+        .card-panel {
             background: #1e293b;
             border: 1px solid #334155;
             border-radius: 12px;
             padding: 1.5rem;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-        }
-
-        .card h3 {
-            margin-bottom: 0.8rem;
-            color: #38bdf8;
-        }
-
-        .card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
             margin-bottom: 1.5rem;
         }
 
+        h2 {
+            color: #38bdf8;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input {
+            background: #0f172a;
+            border: 1px solid #475569;
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+        }
+
         .btn {
-            display: inline-block;
             background: #38bdf8;
             color: #0f172a;
             padding: 0.6rem 1.2rem;
             border-radius: 6px;
-            text-decoration: none;
+            border: none;
             font-weight: bold;
+            cursor: pointer;
             transition: background 0.3s;
         }
 
@@ -139,13 +116,40 @@
             background: #0ea5e9;
         }
 
+        .grid-productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .producto-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .producto-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .producto-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
         footer {
             text-align: center;
-            padding: 1.5rem;
+            padding: 1rem;
             background: #0f172a;
             border-top: 1px solid #1e293b;
             color: #64748b;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            z-index: 10;
         }
     </style>
 </head>
@@ -154,42 +158,76 @@
     <div class="watermark">DAYFER CREACIÓNES</div>
 
     <header>
-        <div class="logo">DAYFER PANEL</div>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Servicios</a>
-            <a href="#">Contacto</a>
-        </nav>
+        <div class="logo">DAYFER CONTROL</div>
+        <div style="color: #94a3b8; font-size: 0.9rem;">Sistema de Caja e Inventario</div>
     </header>
 
     <div class="container">
-        <div class="hero">
-            <h1>Sistema y Gestión Digital</h1>
-            <p>Plataforma optimizada de alto rendimiento y acceso rápido.</p>
+        
+        <!-- Panel de Tasa del Dólar -->
+        <div class="card-panel">
+            <h2>💱 Configurar Tasa del Dólar</h2>
+            <div class="input-group">
+                <label>Precio del Dólar (Bs/Moneda):</label>
+                <input type="number" id="tasaDolar" value="36.5" step="0.01" oninput="actualizarPrecios()">
+            </div>
         </div>
 
-        <div class="grid">
-            <div class="card">
-                <h3>Módulo 1</h3>
-                <p>Gestión automatizada de procesos y control de recursos en tiempo real.</p>
-                <a href="#" class="btn">Acceder</a>
-            </div>
-            <div class="card">
-                <h3>Módulo 2</h3>
-                <p>Panel de control secundario para análisis y despliegue rápido.</p>
-                <a href="#" class="btn">Acceder</a>
-            </div>
-            <div class="card">
-                <h3>Módulo 3</h3>
-                <p>Herramientas de configuración y optimización de red interna.</p>
-                <a href="#" class="btn">Acceder</a>
+        <!-- Panel de Inventario y Ventas -->
+        <div class="card-panel">
+            <h2>📦 Inventario y Venta Rápida</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">Haz clic en "Vender 1" para restar stock automáticamente y calcular el total.</p>
+            
+            <div class="grid-productos" id="listaProductos">
+                <!-- Los productos se cargan aquí mediante JavaScript -->
             </div>
         </div>
+
     </div>
 
     <footer>
         &copy; 2026 DAYFER CREACIÓNES. Todos los derechos reservados.
     </footer>
+
+    <script>
+        // Lista inicial de productos (Precio en Dólares USD y Stock disponible)
+        let productos = [
+            { id: 1, nombre: "Producto A", precioUSD: 10, stock: 15 },
+            { id: 2, nombre: "Producto B", precioUSD: 25, stock: 8 },
+            { id: 3, nombre: "Producto C", precioUSD: 5, stock: 30 }
+        ];
+
+        function actualizarPrecios() {
+            let tasa = parseFloat(document.getElementById('tasaDolar').value) || 1;
+            let contenedor = document.getElementById('listaProductos');
+            contenedor.innerHTML = '';
+
+            productos.forEach(prod => {
+                let precioLocal = (prod.precioUSD * tasa).toFixed(2);
+                
+                let card = document.createElement('div');
+                card.className = 'producto-card';
+                card.innerHTML = `
+                    <h3>${prod.nombre}</h3>
+                    <p>Precio: $${prod.precioUSD} USD<br><strong>(~${precioLocal} Bs)</strong></p>
+                    <p>Stock: <span id="stock-${prod.id}" style="color: ${prod.stock > 0 ? '#38bdf8' : '#ef4444'}; font-weight: bold;">${prod.stock}</span> unid.</p>
+                    <button class="btn" onclick="venderProducto(${prod.id})" ${prod.stock <= 0 ? 'disabled style="background: #475569; cursor: not-allowed;"' : ''}>Vender 1</button>
+                `;
+                contenedor.appendChild(card);
+            });
+        }
+
+        function venderProducto(id) {
+            let prod = productos.find(p => p.id === id);
+            if (prod && prod.stock > 0) {
+                prod.stock -= 1; // Disminuye el inventario
+                actualizarPrecios(); // Refresca la pantalla al instante
+            }
+        }
+
+        // Cargar los productos al iniciar la página
+        window.onload = actualizarPrecios;
+    </script>
 
 </body>
 </html>
